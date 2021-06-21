@@ -1,0 +1,15 @@
+{
+  "name": "tileworldelectron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jos Dehaes <jos.dehaes@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^13.1.2"
+  }
+}
