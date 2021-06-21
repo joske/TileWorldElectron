@@ -13,7 +13,7 @@ class Grid {
         this.tiles = [];
         this.holes = [];
         this.objects = Array.from(Array(COLS), () => new Array(ROWS));
-        for (var i = 0; i < numAgents; i++) {
+        for (var i = 1; i <= numAgents; i++) {
             let { c, r } = this.randomFreeLocation();
             var a = new Agent(i, c, r);
             this.agents.push(a);
