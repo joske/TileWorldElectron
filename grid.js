@@ -8,48 +8,61 @@ class Grid {
         this.COLS = cols;
         this.ROWS = rows;
         const numAgents = 2;
-        this.agents = new Array(numAgents);
-        this.tiles = new Array(5);
-        this.holes = new Array(5);
+        const numObjects = 5;
+        this.agents = [];
+        this.tiles = [];
+        this.holes = [];
         this.objects = Array.from(Array(COLS), () => new Array(ROWS));
         for (var i = 0; i < numAgents; i++) {
-            let {c, r} = this.randomFreeLocation();
+            let { c, r } = this.randomFreeLocation();
             var a = new Agent(i, c, r);
             this.agents.push(a);
             this.objects[a.x][a.y] = a;
         }
-        for (var i = 0; i < 5; i++) {
-            let {c, r} = this.randomFreeLocation();
-            var a = new Tile(i, c, r);
+        for (var i = 0; i < numObjects; i++) {
+            let { c, r } = this.randomFreeLocation();
+            let score = this.randomNbr(6) + 1;
+            var a = new Tile(i, c, r, score);
             this.tiles.push(a);
             this.objects[a.x][a.y] = a;
         }
-        for (var i = 0; i < 5; i++) {
-            let {c, r} = this.randomFreeLocation();
+        for (var i = 0; i < numObjects; i++) {
+            let { c, r } = this.randomFreeLocation();
             var a = new Hole(i, c, r);
             this.holes.push(a);
             this.objects[a.x][a.y] = a;
         }
-        for (var i = 0; i < 5; i++) {
-            let {c, r} = this.randomFreeLocation();
+        for (var i = 0; i < numObjects; i++) {
+            let { c, r } = this.randomFreeLocation();
             var a = new Obstacle(i, c, r);
             this.objects[a.x][a.y] = a;
         }
     }
 
-    object = function(c, r) {
+    object = function (c, r) {
         return this.objects[c][r];
     }
 
-    randomFreeLocation = function() {
-        var c = Math.floor(Math.random() * this.COLS);
-        var r = Math.floor(Math.random() * this.ROWS);
+    randomFreeLocation = function () {
+        var c = this.randomNbr(this.COLS);
+        var r = this.randomNbr(this.ROWS);
         while (typeof this.objects[c][r] !== 'undefined') {
-            c = Math.floor(Math.random() * this.COLS);
-            r = Math.floor(Math.random() * this.ROWS);
+            c = this.randomNbr(this.COLS);
+            r = this.randomNbr(this.ROWS);
         }
-        return {c, r};
+        return { c, r };
     }
+
+    randomNbr = function (max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    update = function() {
+        this.agents.forEach(a => {
+            a.update(this);
+        });
+    }
+
 }
 
 module.exports = {
