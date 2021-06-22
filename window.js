@@ -72,6 +72,7 @@ class Renderer {
             this.ctx.beginPath();
             this.ctx.strokeStyle = this.getRGB(a.num);
             this.ctx.strokeText(`Agent ${a.num}: ${a.score}`, x, y + a.num * MAG);
+            this.ctx.stroke();
         });
         this.ctx.beginPath();
         this.ctx.strokeStyle = 'black';
@@ -113,4 +114,4 @@ class Renderer {
 }
 
 const renderer = new Renderer();
-setInterval(renderer.update, 1000);
+setInterval(renderer.update, 200);

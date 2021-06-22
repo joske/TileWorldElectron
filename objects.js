@@ -54,6 +54,11 @@ class Agent extends GridObject {
             this.pickTile(grid);
             return;
         }
+        if (this.tile !== grid.objects[this.tile.location.c][this.tile.location.r]) {
+            // tile is gone
+            this.tile = grid.closestTile(this.location);
+            return;
+        }
         var path = astar(grid, this.location, this.tile.location);
         console.log(`got path: ${path}`);
         if (path && path.length > 0) {
@@ -67,6 +72,11 @@ class Agent extends GridObject {
         if (this.hole.location.equal(this.location)) {
             //arrived
             this.dumpTile(grid);
+            return;
+        }
+        if (this.hole !== grid.objects[this.hole.location.c][this.hole.location.r]) {
+            // tile is gone
+            this.hole = grid.closestHole(this.location);
             return;
         }
         var path = astar(grid, this.location, this.hole.location);
