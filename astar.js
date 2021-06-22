@@ -11,7 +11,6 @@ class Node {
 nodeCompare = function (a, b) { return a.fscore - b.fscore };
 
 astar = function (grid, from, to) {
-    console.log(`finding path ${from} -> ${to}`);
     var openList = new PriorityQueue([], nodeCompare);
     var closedList = new Set();
     var fromNode = new Node(from, 0);

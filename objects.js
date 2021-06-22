@@ -48,19 +48,13 @@ class Agent extends GridObject {
     }
     
     moveToTile = function(grid) {
-        console.log(`${this} moveToTile`);
         if (this.tile.location.equal(this.location)) {
             //arrived
             this.pickTile(grid);
             return;
         }
-        if (this.tile !== grid.objects[this.tile.location.c][this.tile.location.r]) {
-            // tile is gone
-            this.tile = grid.closestTile(this.location);
-            return;
-        }
+        this.tile = grid.closestTile(this.location);
         var path = astar(grid, this.location, this.tile.location);
-        console.log(`got path: ${path}`);
         if (path && path.length > 0) {
             const nextLoc = path.shift();
             this.move(grid, nextLoc);
@@ -68,17 +62,12 @@ class Agent extends GridObject {
     }
 
     moveToHole = function(grid) {
-        console.log(`${this} moveToTile`);
         if (this.hole.location.equal(this.location)) {
             //arrived
             this.dumpTile(grid);
             return;
         }
-        if (this.hole !== grid.objects[this.hole.location.c][this.hole.location.r]) {
-            // tile is gone
-            this.hole = grid.closestHole(this.location);
-            return;
-        }
+        this.hole = grid.closestHole(this.location);
         var path = astar(grid, this.location, this.hole.location);
         if (path && path.length > 0) {
             const nextLoc = path.shift();
