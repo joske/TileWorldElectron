@@ -46,7 +46,7 @@ class Grid {
     constructor(cols, rows) {
         this.COLS = cols;
         this.ROWS = rows;
-        const numAgents = 5;
+        const numAgents = 6;
         const numObjects = 20;
         this.agents = [];
         this.tiles = [];

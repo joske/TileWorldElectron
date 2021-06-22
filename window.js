@@ -32,6 +32,10 @@ class Renderer {
     update() {
         this.grid.update();
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = 'black';
+        this.ctx.strokeRect(0, 0, COLS * MAG, ROWS * MAG);
+        this.ctx.stroke();
         for (var r = 0; r < ROWS; r++) {
             for (var c = 0; c < COLS; c++) {
                 const l = new Location(c, r);
@@ -74,10 +78,6 @@ class Renderer {
             this.ctx.strokeText(`Agent ${a.num}: ${a.score}`, x, y + a.num * MAG);
             this.ctx.stroke();
         });
-        this.ctx.beginPath();
-        this.ctx.strokeStyle = 'black';
-        this.ctx.strokeRect(0, 0, COLS * MAG, ROWS * MAG);
-        this.ctx.stroke();
     }
 
     getRGB = function (i) {
