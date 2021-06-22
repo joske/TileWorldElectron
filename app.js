@@ -7,7 +7,7 @@ function createWindow() {
         height: 900,
         webPreferences: { nodeIntegration: true, contextIsolation: false }
     })
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
     mainWindow.loadFile('index.html')
     mainWindow.once('ready-to-show', () => {
         mainWindow.show()
