@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^13.1.2"
+  },
+  "dependencies": {
+    "priority-q": "^3.0.15"
   }
 }

@@ -1,13 +1,15 @@
 const gridModule = require('./grid.js');
+const { Obstacle } = require('./objects.js');
 const objects = require('./objects.js');
 let Agent = objects.Agent;
 let GridObject = objects.GridObject;
 let Tile = objects.Tile;
 let Hole = objects.Hole;
+let Location = gridModule.Location;
 
 const MAG = 20;
-const COLS = 10;
-const ROWS = 10;
+const COLS = 40;
+const ROWS = 40;
 
 class Renderer {
     constructor() {
@@ -32,7 +34,8 @@ class Renderer {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         for (var r = 0; r < ROWS; r++) {
             for (var c = 0; c < COLS; c++) {
-                var o = this.grid.object(c, r);
+                const l = new Location(c, r);
+                var o = this.grid.object(l);
                 const x = c * MAG;
                 const y = r * MAG;
                 if (o instanceof Agent) {
@@ -55,7 +58,7 @@ class Renderer {
                     this.ctx.fillStyle = 'black';
                     this.ctx.arc(x + MAG / 2, y + MAG / 2, MAG / 2, 0, 2 * Math.PI, false);
                     this.ctx.fill();
-                } else if (o instanceof Agent) {
+                } else if (o instanceof Obstacle) {
                     this.ctx.beginPath();
                     this.ctx.fillStyle = 'black';
                     this.ctx.fillRect(x, y, MAG, MAG);
@@ -68,7 +71,7 @@ class Renderer {
         this.grid.agents.forEach(a => {
             this.ctx.beginPath();
             this.ctx.strokeStyle = this.getRGB(a.num);
-            this.ctx.strokeText(`Agent ${a.num}: a.score`, x, y + a.num * MAG);
+            this.ctx.strokeText(`Agent ${a.num}: ${a.score}`, x, y + a.num * MAG);
         });
         this.ctx.beginPath();
         this.ctx.strokeStyle = 'black';
@@ -103,7 +106,7 @@ class Renderer {
                 break;
 
             default:
-                return 'rgb(0.5, 0.5, 0)'
+                return 'black'
                 break;
         }
     }
