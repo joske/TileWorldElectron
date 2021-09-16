@@ -21,15 +21,15 @@ astar = function (grid, from, to) {
             return current.path;
         }
         closedList.add(current);
-        checkNeighbor(grid, openList, closedList, current, 0, from, to);
-        checkNeighbor(grid, openList, closedList, current, 1, from, to);
-        checkNeighbor(grid, openList, closedList, current, 2, from, to);
-        checkNeighbor(grid, openList, closedList, current, 3, from, to);
+        checkNeighbor(grid, openList, closedList, current, 0, to);
+        checkNeighbor(grid, openList, closedList, current, 1, to);
+        checkNeighbor(grid, openList, closedList, current, 2, to);
+        checkNeighbor(grid, openList, closedList, current, 3, to);
     }
     return [];
 }
 
-checkNeighbor = function (grid, openList, closedList, current, dir, from, to) {
+checkNeighbor = function (grid, openList, closedList, current, dir, to) {
     var nextLoc = current.location.next(dir);
     if (nextLoc.equal(to) || grid.isValid(nextLoc)) {
         var h = nextLoc.distance(to);

@@ -17,16 +17,12 @@ class Location {
         switch (dir) {
             case 0:
                 return new Location(this.c, this.r - 1);
-                break;
             case 1:
                 return new Location(this.c, this.r + 1);
-                break;
             case 2:
                 return new Location(this.c - 1, this.r);
-                break;
             case 3:
                 return new Location(this.c + 1, this.r);
-                break;
 
             default:
                 break;
